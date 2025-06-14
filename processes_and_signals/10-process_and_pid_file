@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#Too many to count
+echo $$ > /var/run/myscript.pid
+
+trap clean_up 15
+trap clean_up 9
+trap clean_up 3
+trap "echo Y U no love me?!" 2
+
+clean_up()
+{
+	echo "I hate the kill command"
+	rm -r /var/run/myscript.pid
+	exit
+}
+while 'true'
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
