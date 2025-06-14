@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #Kill without kill
-pkill -15 -f 4-to_infinity_and_beyond
+pkill -f 4-to_infinity_and_beyond
 
