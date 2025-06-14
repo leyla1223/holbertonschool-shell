@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #Too many to count
-PIDFILE="/tmp/myscript.pid"
+PIDFILE="/var/run/myscript.pid"
 
-# Cleanup function for SIGTERM and SIGQUIT
+# Cleanup handler
 clean_up() {
     echo "I hate the kill command"
     rm -f "$PIDFILE"
     exit
 }
 
-# Signal handling
+# Signal traps
 trap clean_up SIGTERM
 trap clean_up SIGQUIT
 trap 'echo "Y U no love me?!"' SIGINT
@@ -17,9 +17,8 @@ trap 'echo "Y U no love me?!"' SIGINT
 # Save PID
 echo $$ > "$PIDFILE"
 
-# Infinite loop
-while true
-do
+# Infinite output loop
+while true; do
     echo "To infinity and beyond"
     sleep 2
 done
