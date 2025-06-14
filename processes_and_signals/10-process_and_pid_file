@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
 #Too many to count
+clean_up() {
+    echo "I hate the kill command"
+    rm -f /var/run/myscript.pid
+    exit
+}
+
+# Trap signals (define AFTER the function!)
+trap clean_up SIGTERM   # 15
+trap clean_up SIGQUIT   # 3
+trap 'echo "Y U no love me?!"' SIGINT  # 2
+
+# Write PID to file
 echo $$ > /var/run/myscript.pid
 
-trap clean_up 15
-trap clean_up 9
-trap clean_up 3
-trap "echo Y U no love me?!" 2
-
-clean_up()
-{
-	echo "I hate the kill command"
-	rm -r /var/run/myscript.pid
-	exit
-}
-while 'true'
+# Infinite loop
+while true
 do
-	echo "To infinity and beyond"
-	sleep 2
+    echo "To infinity and beyond"
+    sleep 2
 done
