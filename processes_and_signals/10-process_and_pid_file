@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
 #Too many to count
+PIDFILE="/tmp/myscript.pid"
+
+# Cleanup function for SIGTERM and SIGQUIT
 clean_up() {
     echo "I hate the kill command"
-    rm -f /var/run/myscript.pid
+    rm -f "$PIDFILE"
     exit
 }
 
-# Trap signals (define AFTER the function!)
-trap clean_up SIGTERM   # 15
-trap clean_up SIGQUIT   # 3
-trap 'echo "Y U no love me?!"' SIGINT  # 2
+# Signal handling
+trap clean_up SIGTERM
+trap clean_up SIGQUIT
+trap 'echo "Y U no love me?!"' SIGINT
 
-# Write PID to file
-echo $$ > /var/run/myscript.pid
+# Save PID
+echo $$ > "$PIDFILE"
 
 # Infinite loop
 while true
