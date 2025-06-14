@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #Kill without kill
-pkill -f 4-to_infinity_and_beyond
+pkill --signal SIGTERM -f 4-to_infinity_and_beyond
 
